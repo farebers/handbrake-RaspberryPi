@@ -1,10 +1,12 @@
 from: https://github.com/kapitainsky/handbreak-RaspberryPi
 
-# handbreakCLI-RaspberryPi
+for me also GUI variant worked. Using 1.3.1.
 
-building handbreakCLI on raspberry pi including x265 codec
+# handbrakeCLI-RaspberryPi
 
-Does it make sense to build handbreak on raspberry pi? Be warned it wont be fast. 10-20 times slower that i5 Intel CPU laptop. But it works so why not.
+building handbrakeCLI on raspberry pi including x265 codec
+
+Does it make sense to build handbrake on raspberry pi? Be warned it wont be fast. 10-20 times slower that i5 Intel CPU laptop. But it works so why not.
 
 I have managed sucessfully compile it on RPi 2B+, 3 and 3B+ running raspbian 4.14.98
 
@@ -23,7 +25,7 @@ sudo curl -L 'http://ftp.debian.org/debian/pool/main/n/nasm/nasm_2.14-1_armhf.de
 ```
 
 
-### 3. we clone handbreak from github and jump few commits forward from 1.2.2
+### 3. we clone handbrake from github and jump few commits forward from 1.2.2
 
 only then we can disable nvidia and intel qsv, it was not possible in 1.2.2
 
