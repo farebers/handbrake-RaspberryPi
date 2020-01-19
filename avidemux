@@ -20,3 +20,5 @@ bash bootStrap.bash --deb --debug --rebuild --enable-qt4
 
 # as root
 dpkg -i debs/*.deb
+
+run it - go to settings/cpu - uncheck 'use 3DNOWEXT'
