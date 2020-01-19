@@ -1,0 +1,22 @@
+# as root
+
+apt install gcc g++ make cmake pkg-config libpng12-dev fakeroot yasm libsqlite3-dev build-essential libqt4-dev qttools5-dev-tools qtbase5-dev libmp3lame-dev libx264-dev libfaad-dev gcc g++ make cmake pkg-config libpng12-dev fakeroot yasm libsqlite3-dev build-essential libqt4-dev qttools5-dev-tools qtbase5-dev libmp3lame-dev libx264-dev libfaad-dev 
+
+echo 'deb http://www.deb-multimedia.org/ buster main' > /etc/apt/sources.list.d/deb-multimedia.list 
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5C808C2B65558117
+apt update
+apt install libaften-dev libfaac-dev
+
+apt install libass-dev libfdk-aac-dev libdca-dev libfontconfig1-dev libfribidi-dev libmad0-dev libogg-dev libopencore-amrnb-dev libopencore-amrwb-dev libopus-dev libpulse-dev libsamplerate0-dev libva-dev libvdpau-dev libvorbis-dev libvpx-dev libx265-dev libxv-dev libxvidcore-dev libzip-dev qtscript5-dev vainfo vdpauinfo x265
+
+apt install glusterfs-common libgluegen2-build-java libgluegen2-doc libgluegen2-jni libgluegen2-rt-java libglui-dev libglui2c2 libglusterfs-dev libglusterfs0
+
+# as non-root
+wget -O avidemux_2.7.4.tar.gz 'https://downloads.sourceforge.net/project/avidemux/avidemux/2.7.4/avidemux_2.7.4.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Favidemux%2Ffiles%2Favidemux%2F2.7.4%2F&amp;ts=1579445896&amp;use_mirror=netcologne'
+tar xf avidemux_2.7.4.tar.gz
+cd avidemux_2.7.4
+# --rebuild KEEPS a previous build dir. use if you DON'T want to rebuild everything.
+bash bootStrap.bash --deb --debug --rebuild --enable-qt4
+
+# as root
+dpkg -i debs/*.deb
