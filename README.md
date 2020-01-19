@@ -14,7 +14,13 @@ I have managed sucessfully compile it on RPi 2B+, 3 and 3B+ running raspbian 4.1
 ### 1. install all dependencies
 
 ```
-apt install git autoconf automake build-essential cmake libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libvorbis-dev libx264-dev libxml2-dev m4 make patch pkg-config python tar yasm zlib1g-dev libvpx-dev xz-utils bzip2 zlib1g meson nasm libnuma-dev libnuma1 autopoint libgtk-3-dev libwebkit2gtk-4.0-dev gettext
+apt install git autoconf automake build-essential cmake libass-dev libbz2-dev libfontconfig1-dev \
+libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libogg-dev \
+libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libvorbis-dev libx264-dev \
+libxml2-dev m4 make patch pkg-config python tar yasm zlib1g-dev libvpx-dev xz-utils bzip2 zlib1g meson \
+nasm libnuma-dev libnuma1 autopoint libgtk-3-dev libwebkit2gtk-4.0-dev gettext intltool libappindicator-dev \
+libass-dev libdbus-glib-1-dev libglib2.0-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev \
+libgudev-1.0-dev libmp3lame-dev libnotify-dev ninja-build
 ```
 
 
