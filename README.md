@@ -14,14 +14,16 @@ I have managed sucessfully compile it on RPi 2B+, 3 and 3B+ running raspbian 4.1
 ### 1. install all dependencies
 
 ```
-sudo apt-get install git autoconf automake build-essential cmake libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libvorbis-dev libx264-dev libxml2-dev m4 make patch pkg-config python tar yasm zlib1g-dev libvpx-dev xz-utils bzip2 zlib1g
+apt install git autoconf automake build-essential cmake libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libvorbis-dev libx264-dev libxml2-dev m4 make patch pkg-config python tar yasm zlib1g-dev libvpx-dev xz-utils bzip2 zlib1g meson nasm libnuma-dev libnuma1 autopoint
 ```
 
 
 ### 2. debian nasm is too old we need newer one
 
+no it's ok under buster
+
 ```
-sudo curl -L 'http://ftp.debian.org/debian/pool/main/n/nasm/nasm_2.14-1_armhf.deb' -o /var/cache/apt/archives/nasm_2.14-1_armhf.deb && sudo dpkg -i /var/cache/apt/archives/nasm_2.14-1_armhf.deb
+# sudo curl -L 'http://ftp.debian.org/debian/pool/main/n/nasm/nasm_2.14-1_armhf.deb' -o /var/cache/apt/archives/nasm_2.14-1_armhf.deb && sudo dpkg -i /var/cache/apt/archives/nasm_2.14-1_armhf.deb
 ```
 
 
@@ -29,8 +31,10 @@ sudo curl -L 'http://ftp.debian.org/debian/pool/main/n/nasm/nasm_2.14-1_armhf.de
 
 only then we can disable nvidia and intel qsv, it was not possible in 1.2.2
 
+1.3.1 works
+
 ```
-git clone https://github.com/HandBrake/HandBrake.git && cd HandBrake && git checkout c7119499f5a2da7e5be0afd50a6757778fed53e7
+git clone https://github.com/HandBrake/HandBrake.git && cd HandBrake 
 ```
 
 
@@ -39,20 +43,19 @@ git clone https://github.com/HandBrake/HandBrake.git && cd HandBrake && git chec
 Without it won't compile on RPi
 
 ```
-echo "X265_8.CONFIGURE.extra +=  -DENABLE_ASSEMBLY=OFF -DENABLE_PIC=ON -DENABLE_AGGRESSIVE_CHECKS=ON -DENABLE_TESTS=ON -DCMAKE_SKIP_RPATH=ON" >> ./contrib/x265_8bit/module.defs \
-&& \
-echo "X265_10.CONFIGURE.extra +=  -DENABLE_ASSEMBLY=OFF -DENABLE_PIC=ON -DENABLE_AGGRESSIVE_CHECKS=ON -DENABLE_TESTS=ON -DCMAKE_SKIP_RPATH=ON" >>  ./contrib/x265_10bit/module.defs \
-&& \
-echo "X265_12.CONFIGURE.extra +=  -DENABLE_ASSEMBLY=OFF -DENABLE_PIC=ON -DENABLE_AGGRESSIVE_CHECKS=ON -DENABLE_TESTS=ON -DCMAKE_SKIP_RPATH=ON" >>  ./contrib/x265_12bit/module.defs \
-&& \
+echo "X265_8.CONFIGURE.extra +=  -DENABLE_ASSEMBLY=OFF -DENABLE_PIC=ON -DENABLE_AGGRESSIVE_CHECKS=ON -DENABLE_TESTS=ON -DCMAKE_SKIP_RPATH=ON" >> ./contrib/x265_8bit/module.defs
+echo "X265_10.CONFIGURE.extra +=  -DENABLE_ASSEMBLY=OFF -DENABLE_PIC=ON -DENABLE_AGGRESSIVE_CHECKS=ON -DENABLE_TESTS=ON -DCMAKE_SKIP_RPATH=ON" >>  ./contrib/x265_10bit/module.defs
+echo "X265_12.CONFIGURE.extra +=  -DENABLE_ASSEMBLY=OFF -DENABLE_PIC=ON -DENABLE_AGGRESSIVE_CHECKS=ON -DENABLE_TESTS=ON -DCMAKE_SKIP_RPATH=ON" >>  ./contrib/x265_12bit/module.defs
 echo "X265.CONFIGURE.extra  +=  -DENABLE_ASSEMBLY=OFF -DENABLE_PIC=ON -DENABLE_AGGRESSIVE_CHECKS=ON -DENABLE_TESTS=ON -DCMAKE_SKIP_RPATH=ON" >>  ./contrib/x265/module.defs
 ```
 
 
 ### 5. now we can configure our project
 
+gui works 
+
 ```
-./configure --launch-jobs=$(nproc) --disable-gtk --disable-nvenc --disable-qsv --enable-fdk-aac
+./configure --launch-jobs=$(nproc) --disable-nvenc --disable-qsv --enable-fdk-aac
 ```
 
 
@@ -71,10 +74,10 @@ cd build
 make -j 4 x265
 ```
 
-Wait unitl you see that files have been downloaded then CTRL-C
+Wait until you see that files have been downloaded then CTRL-C
 
 ```
-nano ./contrib/x265/x265_3.0/source/common/primitives.cpp
+vi contrib/x265/x265_3.2.1/source/common/primitives.cpp
 ```
 
 and change following section - at the end of the file:
@@ -100,8 +103,10 @@ we just change == condition to !=
 
 ### 7. we can build all now
 
+make clean was not necessary for me
+
 ```
-make clean
+# make clean
 ```
 
 ```
